@@ -65,7 +65,7 @@ export const payments = pgTable("payments", {
   event_id: integer("event_id").references(() => events.event_id),
   user_id: integer("user_id").references(() => users.user_id),
   amount: numeric("amount"),
-  paymentStatus: boolean("paymentStatus"),
+  paymentStatus: boolean("paymentStatus").default(false),
   paymentDate: date("paymentDate"),
   paymentMethod: paymentMethodEnum("paymentMethod"),
   transactionId: varchar("transactionId", { length: 255 }),

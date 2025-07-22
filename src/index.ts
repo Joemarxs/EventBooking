@@ -3,6 +3,7 @@ import userRoutes from './User/user.router';
 import venueRoutes from './Venues/venue.router';
 import eventRoutes from './Events/event.router';
 import paymentRoutes from './payments/payments.router';
+import mpesaRoutes from "./mpesa/mpesa.router";
 import customerSupportRoutes from './customerSupport/customerSupport.router';
 
 
@@ -14,6 +15,7 @@ const PORT = 8083;
 app.use(express.json());
 
 // Routes
+app.use('/api/mpesa', mpesaRoutes);
 app.use('/api/support', customerSupportRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/users', userRoutes);

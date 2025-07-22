@@ -4,7 +4,7 @@ import app from '../../index';
 describe('User API Integration Tests', () => {
   let userId: number;
   const userData = {
-    email: 'testing90user@example.com',
+    email: 'testing170user@example.com',
     password: '12345678',
     first_name: 'Test',
     last_name: 'User',

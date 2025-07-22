@@ -51,17 +51,16 @@ export const handleCreatePayment = async (req: Request, res: Response) => {
     event_id,
     user_id,
     amount,
-    paymentStatus,
     paymentDate,
     paymentMethod,
     transactionId
   } = req.body;
 
+  // Remove paymentStatus from required fields
   const missing = validateRequiredFields(req.body, [
     'event_id',
     'user_id',
     'amount',
-    'paymentStatus',
     'paymentDate',
     'paymentMethod',
     'transactionId'
@@ -75,13 +74,23 @@ export const handleCreatePayment = async (req: Request, res: Response) => {
   }
 
   try {
-    const newPayment = await createPayment(req.body);
+    const newPayment = await createPayment({
+      event_id,
+      user_id,
+      amount,
+      paymentDate,
+      paymentMethod,
+      transactionId,
+      paymentStatus: false, // 👈 force default false here
+    });
+
     return res.status(201).json(newPayment);
   } catch (error: any) {
     console.error('Error creating payment:', error);
     return respondWithError(res, 400, error?.message || 'Failed to create payment');
   }
 };
+
 
 export const handleUpdatePayment = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
